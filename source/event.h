@@ -9,6 +9,18 @@
 
 namespace moasm
 {
+    class EventArgs
+    {
+    public:
+        /// <summary>
+        /// Gets an empty, read-only <see cref="EventArgs"/> object. 
+        /// </summary>
+        static const EventArgs Empty;
+
+        EventArgs(){};
+        virtual ~EventArgs(){};
+    };
+
     template <typename TFunc>
     class Event;
 

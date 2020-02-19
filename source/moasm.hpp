@@ -90,10 +90,24 @@ namespace moasm
     #define __get__() [&]()
     #define __set__(T) , [&](T value)
 
+    struct PropertyId {
+    public:
+
+        inline static PropertyId NextId() {
+            static std::atomic_size_t static_id {0};
+            ++static_id;
+            return {static_id};
+        }
+
+        std::size_t const Id;
+    };
+
     template<typename T>
     class ObservableProperty : Property<T> {
-
+        
     public:
+        PropertyId const Id { PropertyId::NextId () };
+
         ObservableProperty() : Property();
         ObservableProperty(T o) : Property(o);
 
